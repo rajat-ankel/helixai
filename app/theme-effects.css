@@ -1,0 +1,130 @@
+/* Theme-based glow and visual effects */
+
+.theme-glow {
+  position: relative;
+}
+
+.theme-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+  filter: blur(calc(var(--glow-spread) / 2));
+  background-color: hsl(var(--glow-color));
+  opacity: var(--glow-opacity);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.theme-glow:hover::after {
+  opacity: calc(var(--glow-opacity) * 1.5);
+}
+
+.theme-border {
+  border: 1px solid hsl(var(--primary) / 0.3);
+}
+
+.theme-shadow {
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.15);
+}
+
+.theme-gradient-text {
+  background: linear-gradient(
+    135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(calc(var(--theme-hue) + 30), var(--theme-saturation), var(--theme-lightness)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.theme-gradient-bg {
+  background: linear-gradient(
+    135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(calc(var(--theme-hue) + 30), var(--theme-saturation), var(--theme-lightness)) 100%
+  );
+}
+
+.theme-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--primary) / 0.2) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.theme-highlight:hover::before {
+  left: 100%;
+}
+
+/* Animated button with theme color */
+.theme-button {
+  position: relative;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.theme-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--primary-foreground) / 0.2) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.theme-button:hover::after {
+  transform: translateX(100%);
+}
+
+/* Theme-colored scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.7);
+}
